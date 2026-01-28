@@ -1,19 +1,30 @@
+/* RESET & BASIS */
 * {
   box-sizing: border-box;
-  font-family: system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
 }
 
 body {
-  margin: 0;
   background: #111;
   color: #fff;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* LIGHT MODE */
 body.light {
   background: #f2f2f7;
   color: #000;
 }
 
+/* INTRO */
 #intro {
   position: fixed;
   inset: 0;
@@ -26,59 +37,41 @@ body.light {
 }
 
 @keyframes fadeOut {
-  0% { opacity: 1 }
-  80% { opacity: 1 }
+  0%, 80% { opacity: 1 }
   100% { opacity: 0; pointer-events: none }
 }
 
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 16px;
+  padding-top: calc(env(safe-area-inset-top) + 12px);
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
 }
 
 .header-buttons button {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 14px;
+  font-size: 16px;
 }
 
+/* BUTTONS */
+button {
+  border: none;
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
 
 .primary {
   background: #ffd400;
-  border-radius: 18px;
-  padding: 10px 16px;
-  border: none;
-  font-weight: bold;
-}
-
-ul {
-  list-style: none;
-  padding: 16px;
-}
-
-li {
-  background: #2b2b2e;
-  padding: 16px;
-  border-radius: 18px;
-  margin-bottom: 12px;
-}
-
-body.light li {
-  background: #fff;
-}
-
-.row {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-button {
-  border: none;
-  border-radius: 14px;
-  padding: 8px 12px;
-  cursor: pointer;
+  font-weight: 600;
 }
 
 .danger {
@@ -86,6 +79,25 @@ button {
   color: #fff;
 }
 
+/* LISTE */
+ul {
+  list-style: none;
+  padding: 16px;
+  margin: 0;
+}
+
+li {
+  background: #2b2b2e;
+  padding: 16px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+body.light li {
+  background: #fff;
+}
+
+/* MODAL */
 .modal {
   position: fixed;
   inset: 0;
@@ -93,6 +105,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 200;
 }
 
 .hidden {
@@ -102,26 +115,29 @@ button {
 .modal-box {
   background: #2b2b2e;
   padding: 20px;
-  border-radius: 20px;
-  width: 90%;
+  border-radius: 22px;
+  width: 92%;
   max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 .modal-box.small {
   max-width: 300px;
 }
 
+/* CHECKBOX GRID */
 .checkbox-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin: 12px 0;
+  margin: 14px 0;
 }
 
 .checkbox-grid label {
   background: #3a3a3d;
-  border-radius: 14px;
-  padding: 10px;
+  border-radius: 16px;
+  padding: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -140,14 +156,39 @@ button {
   border-color: #ffd400;
 }
 
-input, textarea {
+/* INPUTS – iOS SAFE */
+input,
+textarea {
   width: 100%;
-  padding: 10px;
-  border-radius: 12px;
+  font-size: 16px; /* WICHTIG für iOS */
+  padding: 12px;
+  border-radius: 14px;
   margin-top: 10px;
   border: 2px solid transparent;
+  outline: none;
+  background: #1c1c1e;
+  color: #fff;
 }
 
+body.light input,
+body.light textarea {
+  background: #fff;
+  color: #000;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #ffd400;
+}
+
+/* FEHLER */
 input.error {
   border-color: red;
+}
+
+/* ROW */
+.row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
 }

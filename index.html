@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Essensliste</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- iOS FIX (kein Reinzoomen) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#111111">
+
+  <!-- iOS PWA -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Essensliste">
 
+  <!-- iOS SPLASH (statisch, Pflicht für Apple) -->
+  <link rel="apple-touch-startup-image" href="splash.png">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
   <!-- jsPDF -->
@@ -19,6 +28,15 @@
 
 <body class="dark">
 
+<!-- 🔥 ANIMATED SPLASHSCREEN -->
+<div id="splash">
+  <div class="splash-content">
+    <img src="icon.png" alt="Essensliste Logo">
+    <h1>Essensliste</h1>
+  </div>
+</div>
+
+<!-- INTRO (bleibt, falls du es noch brauchst) -->
 <div id="intro">
   <h1>Essensliste</h1>
 </div>
@@ -27,8 +45,8 @@
   <h2>Essensliste</h2>
   <div class="header-buttons">
     <button id="themeToggle">🌙</button>
-    <button id="printPdf" class="danger">📄 Ausdruck</button>
-    <button id="addEntry" class="primary">+ Neuer Eintrag</button>
+    <button id="printPdf" class="danger">📄</button>
+    <button id="addEntry" class="primary">+ Neu</button>
   </div>
 </header>
 
@@ -36,9 +54,9 @@
   <ul id="entryList"></ul>
 </main>
 
+<!-- MODAL -->
 <div id="modal" class="modal hidden">
   <div class="modal-box">
-    <button class="close" id="closeModal">×</button>
     <h3>Eintrag</h3>
 
     <div class="checkbox-grid">
@@ -56,9 +74,10 @@
   </div>
 </div>
 
+<!-- DELETE MODAL -->
 <div id="confirmModal" class="modal hidden">
   <div class="modal-box small">
-    <h3>Eintrag wirklich löschen?</h3>
+    <h3>Eintrag löschen?</h3>
     <div class="row">
       <button id="confirmDelete" class="danger">Löschen</button>
       <button id="cancelDelete">Abbrechen</button>
