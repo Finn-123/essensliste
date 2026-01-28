@@ -161,4 +161,12 @@ printBtn.onclick = () => {
   doc.save("Essensliste.pdf");
 };
 
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const splash = document.getElementById("splash");
+    if (splash) splash.remove();
+  }, 2200);
+});
+
+
 render();
